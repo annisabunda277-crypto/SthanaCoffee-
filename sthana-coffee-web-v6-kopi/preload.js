@@ -1,0 +1,1 @@
+try{var r=document.documentElement;if(sessionStorage.getItem('sthana-seen'))r.classList.add('no-loader');if(sessionStorage.getItem('sthana-nav')){r.classList.add('trans-in');sessionStorage.removeItem('sthana-nav')}}catch(e){}
