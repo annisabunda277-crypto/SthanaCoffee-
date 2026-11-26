@@ -1,0 +1,98 @@
+/* ==========================================================
+   Sthana Coffee - Halaman FAQ bertema kopi (faq.css)
+   Cangkir beruap, biji kopi berjatuhan, dan kartu FAQ yang hidup.
+   ========================================================== */
+
+body[data-page="faq"] .section--page { position: relative; overflow: hidden; }
+body[data-page="faq"] .section--page > .container { position: relative; z-index: 1; }
+
+/* ---------- Biji kopi berjatuhan di latar ---------- */
+.faq-bg { position: absolute; inset: 0; z-index: 0; pointer-events: none; overflow: hidden; }
+.bean {
+  position: absolute; top: -50px; left: var(--x); width: var(--s); height: calc(var(--s) * 1.35);
+  border-radius: 50%; background: radial-gradient(ellipse at 35% 30%, #a9805d, #5a3a28 70%);
+  box-shadow: inset -2px -3px 5px rgba(0, 0, 0, .25); opacity: 0;
+  animation: faqFall var(--d) linear var(--delay) infinite;
+}
+.bean::after {
+  content: ''; position: absolute; left: 46%; top: 9%; width: 8%; height: 82%; border-radius: 50%;
+  background: rgba(30, 18, 12, .6); transform: rotate(14deg);
+}
+@keyframes faqFall {
+  0%   { opacity: 0; transform: translate3d(0, 0, 0) rotate(var(--r, 0deg)); }
+  8%   { opacity: .32; }
+  50%  { transform: translate3d(22px, 55vh, 0) rotate(calc(var(--r, 0deg) + 160deg)); }
+  92%  { opacity: .32; }
+  100% { opacity: 0; transform: translate3d(-14px, 112vh, 0) rotate(calc(var(--r, 0deg) + 340deg)); }
+}
+
+/* ---------- Cangkir kopi beruap ---------- */
+.faq-cup { width: 150px; margin: 0 auto .35rem; animation: faqBob 4s ease-in-out infinite; }
+.faq-cup svg { display: block; width: 100%; height: auto; overflow: visible; filter: drop-shadow(0 10px 14px rgba(62, 39, 35, .22)); }
+@keyframes faqBob { 0%, 100% { transform: translateY(0) rotate(-1.5deg); } 50% { transform: translateY(-6px) rotate(1.5deg); } }
+
+.faq-steam { fill: none; stroke: var(--c-accent, #8f6849); stroke-width: 4.5; stroke-linecap: round; opacity: 0; transform-box: fill-box; transform-origin: 50% 100%; animation: faqSteam 3s ease-in-out infinite; }
+.faq-steam--2 { animation-delay: .9s; }
+.faq-steam--3 { animation-delay: 1.8s; }
+@keyframes faqSteam {
+  0%   { opacity: 0; transform: translateY(14px) scaleX(.85); }
+  30%  { opacity: .85; }
+  100% { opacity: 0; transform: translateY(-30px) scaleX(1.2); }
+}
+.faq-heart { transform-box: fill-box; transform-origin: center; animation: faqHeart 2.4s ease-in-out infinite; }
+@keyframes faqHeart { 0%, 100% { transform: scale(1); } 50% { transform: scale(1.18); } }
+.faq-ripple { fill: none; stroke: #efe3d0; stroke-width: 2; transform-box: fill-box; transform-origin: center; opacity: 0; animation: faqRipple 3s ease-out infinite; }
+@keyframes faqRipple { 0% { opacity: .7; transform: scale(.35); } 100% { opacity: 0; transform: scale(1.05); } }
+
+/* Judul: gradasi kopi */
+body[data-page="faq"] .section__title { background: linear-gradient(100deg, var(--c-primary, #2a1c16), var(--c-accent, #8f6849), var(--c-primary, #2a1c16)); background-size: 200% 100%; -webkit-background-clip: text; background-clip: text; color: transparent; animation: faqShine 6s linear infinite; }
+@keyframes faqShine { to { background-position: -200% 0; } }
+
+/* ---------- Kartu FAQ ---------- */
+body[data-page="faq"] .faq details {
+  position: relative; overflow: hidden; border: 1px solid rgba(143, 104, 73, .18);
+  transition: transform .25s ease, box-shadow .25s ease, background .3s ease;
+  animation: faqIn .6s cubic-bezier(.2, .9, .3, 1.1) both;
+}
+body[data-page="faq"] .faq details:nth-child(1)  { animation-delay: .05s; }
+body[data-page="faq"] .faq details:nth-child(2)  { animation-delay: .12s; }
+body[data-page="faq"] .faq details:nth-child(3)  { animation-delay: .19s; }
+body[data-page="faq"] .faq details:nth-child(4)  { animation-delay: .26s; }
+body[data-page="faq"] .faq details:nth-child(5)  { animation-delay: .33s; }
+body[data-page="faq"] .faq details:nth-child(6)  { animation-delay: .40s; }
+body[data-page="faq"] .faq details:nth-child(7)  { animation-delay: .47s; }
+body[data-page="faq"] .faq details:nth-child(8)  { animation-delay: .54s; }
+body[data-page="faq"] .faq details:nth-child(9)  { animation-delay: .61s; }
+body[data-page="faq"] .faq details:nth-child(n+10) { animation-delay: .68s; }
+@keyframes faqIn { from { opacity: 0; transform: translateY(18px) scale(.98); } to { opacity: 1; transform: none; } }
+
+body[data-page="faq"] .faq details::before {
+  content: ''; position: absolute; left: 0; top: 0; bottom: 0; width: 4px;
+  background: linear-gradient(var(--c-latte, #d2b48c), var(--c-accent, #8f6849)); transform: scaleY(0); transform-origin: top; transition: transform .3s ease;
+}
+body[data-page="faq"] .faq details:hover { transform: translateY(-2px); box-shadow: var(--warm-shadow-lg, 0 18px 44px rgba(111, 79, 54, .22)); }
+body[data-page="faq"] .faq details:hover::before,
+body[data-page="faq"] .faq details[open]::before { transform: scaleY(1); }
+body[data-page="faq"] .faq details[open] { background: linear-gradient(180deg, #fff, #faf2e8); }
+
+/* Biji kopi kecil sebagai ikon; berputar saat dibuka */
+body[data-page="faq"] .faq summary { justify-content: flex-start; gap: .85rem; }
+body[data-page="faq"] .faq summary::before {
+  content: ''; flex: none; width: 28px; height: 28px; transition: transform .5s cubic-bezier(.3, 1.6, .5, 1);
+  background: url("data:image/svg+xml;utf8,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 32 32'><g transform='rotate(-35 16 16)'><ellipse cx='16' cy='16' rx='9' ry='13' fill='%238f6849'/><path d='M16 4 C10 12 22 20 16 28' fill='none' stroke='%232a1c16' stroke-width='2' stroke-linecap='round'/></g></svg>") center / contain no-repeat;
+}
+body[data-page="faq"] .faq summary:hover::before { transform: rotate(-20deg) scale(1.12); }
+body[data-page="faq"] .faq details[open] summary::before { transform: rotate(360deg) scale(1.1); }
+body[data-page="faq"] .faq summary::after { margin-left: auto; }
+body[data-page="faq"] .faq details[open] summary::after { transform: rotate(180deg); }
+body[data-page="faq"] .faq summary::after { transition: transform .3s ease; }
+
+/* Jawaban turun seperti kopi dituang */
+body[data-page="faq"] .faq details[open] .faq__a { animation: faqPour .5s cubic-bezier(.2, .9, .3, 1) both; }
+@keyframes faqPour { from { opacity: 0; transform: translateY(-10px); clip-path: inset(0 0 100% 0); } to { opacity: 1; transform: none; clip-path: inset(0 0 0 0); } }
+
+@media (prefers-reduced-motion: reduce) {
+  .bean, .faq-cup, .faq-steam, .faq-heart, .faq-ripple, body[data-page="faq"] .section__title, body[data-page="faq"] .faq details, body[data-page="faq"] .faq details[open] .faq__a { animation: none !important; }
+  .faq-steam { opacity: .5; }
+  .bean { opacity: .2; }
+}
